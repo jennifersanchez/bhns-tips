@@ -17,3 +17,4 @@ You want to plot **your** bhns's Mass vs Time.
            plt.xlabel('Rho')
            plt.ylabel('time')
            plt.show()
+           
