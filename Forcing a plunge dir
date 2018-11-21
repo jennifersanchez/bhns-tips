@@ -3,3 +3,17 @@ Dr. Lovelace suggested I try and force the simulation to reach a plunge.
 After some trial and error, I got it to work and everything ran smoothly.
 Here's what I did:
 
+You want to plot **your** bhns's Mass vs Time. 
+     In order to do this, we have to join all the MassIntegral.dat files:
+        1) mkdir files
+        2) cd files
+        3) JoinDatFiles ../Lev0_*/Run/MassIntegral.dat > MassIntegral.dat 
+     On Jupyter Notebook:
+        1) import numpy as np
+        2) %matplotlib inline 
+        3) from matplotlib import pyplot as plt
+        4) massinteg=np.genfromtxt("MassIntegral.dat")
+        5) plt.plot(massinteg[:,0],massinteg[:,1])
+           plt.xlabel('Rho')
+           plt.ylabel('time')
+           plt.show()
