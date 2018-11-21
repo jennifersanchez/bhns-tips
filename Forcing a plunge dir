@@ -3,7 +3,8 @@ Dr. Lovelace suggested I try and force the simulation to reach a plunge.
 After some trial and error, I got it to work and everything ran smoothly.
 Here's what I did:
 
-You want to plot **your** bhns's Mass vs Time. 
+You want to plot your bhns's Mass vs Time. 
+     The purpose of this is to determine what segment we want to start our Plunge directory
      In order to do this, we have to join all the MassIntegral.dat files:
         1) mkdir files
         2) cd files
@@ -14,7 +15,29 @@ You want to plot **your** bhns's Mass vs Time.
         3) from matplotlib import pyplot as plt
         4) massinteg=np.genfromtxt("MassIntegral.dat")
         5) plt.plot(massinteg[:,0],massinteg[:,1])
-           plt.xlabel('Rho')
-           plt.ylabel('time')
+           plt.xlabel('time')
+           plt.ylabel('Rho')
            plt.show()
+        From this plot you should see a a somewhat horizontal line that ultimately plummets over time. 
+        Determine the Rho value before the line begins to obvioulsy dip. 
+        From there, determine what segment that Rho value pertains to. The segment after this will be our Lev_Plunge.
+        My Rho value was 0.643 and that belonged to Lev0_AJ
+
+Go to Lev0_AK:
+        1) cd Run
+        2) head MassIntegral.dat 
+        # Copy the first Rho value.
+In your Ev directory:
+        1) mkdir goner
+        2) mv EveryLevDirAfterLev0_AJ goner
+        # Don't forget to load your spec modules!
+        3) MakeNextSegment -d Lev0_AJ/
+        4) cd Lev0_AK
+        5) emacs Evolution.input
+        # Scroll to line 63, or "Target=0.506401470063149;" Delete the target number and paste your copied Rho value then save.
+        6) cd ../
+        7) qsub Submit.sh
+      It might take 1 or 2 new Levs before the Lev_Plunge is made, but everything should work. 
+    
+
            
