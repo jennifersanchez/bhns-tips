@@ -1,0 +1,5 @@
+In one of my simulations, I noted that there were various Levs created (Lev_A*, Lev_B*), but it still wasn't reaching a Lev_Plunge dir. I plotted the Mass vs Time, and the plot suggested there should have already been a plunge directory.
+Dr. Lovelace suggested I try and force the simulation to reach a plunge. 
+After some trial and error, I got it to work and everything ran smoothly.
+Here's what I did:
+
