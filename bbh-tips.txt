@@ -1,3 +1,13 @@
+==== Running a BBH simulation====
+1) Load your SpEC modules:
+ source ~/SpEC/MakefileRules/this_machine.env
+2) mkdir NAMEOFSIMULATION then cd into it
+3) Type: PrepareID -t bbh2 -reduce-ecc
+4) Modify 'Params.input' as needed
+5) type: ZeroEccParamsFromPN -h (#This is to determine the 'Omega0' and 'adot0')
+5) Type: ./StartJob.sh 
+6) Type: ShowQueue (#to see simulation run time etc.)
+7) If your simulation dies, you can 'less SpEC.stderr'to see the standard error</code>
 
 
 ==== Jupyter script to plot trajectories====
@@ -77,22 +87,20 @@ Convert the .h5 to pvd by running the following:
 To get the trajectories and spin data
 
 Join the Horizons.h5 files for all the segments using the following command (remember to change the file path)
-
-     JoinH5 -o NAME.h5 ../Lev0_*/Run/ApparentHorizons/Horizons.h5
+JoinH5 -o NAME.h5 ../Lev0_*/Run/ApparentHorizons/Horizons.h5
 
 Then,
-
      ExtractFromH5 Horizons.h5
           cd extracted-Horizons
 
      cd extracted-Horizons
           ln -s AhA.dir/chiInertial.dat ./SpinA.dat
-	       ln -s AhB.dir/chiInertial.dat ./SpinB.dat
-	            ln -s AhC.dir/chiInertial.dat ./SpinC.dat
+	  ln -s AhB.dir/chiInertial.dat ./SpinB.dat
+	  ln -s AhC.dir/chiInertial.dat ./SpinC.dat
 
      ln -s AhA.dir/CoordCenterInertial.dat ./TrajA.dat
-          ln -s AhB.dir/CoordCenterInertial.dat ./TrajB.dat
-	       ln -s AhC.dir/CoordCenterInertial.dat ./TrajC.dat
-	            ~/SpEC/Support/Visualization/ConvertTrajectoryToVtk -v -n TrajA,SpinA TrajA.dat SpinA.dat
-		         ~/SpEC/Support/Visualization/ConvertTrajectoryToVtk -v -n TrajB,SpinB TrajB.dat SpinB.dat
-			      ~/SpEC/Support/Visualization/ConvertTrajectoryToVtk -v -n TrajC,SpinC TrajC.dat SpinC.dat~
+     ln -s AhB.dir/CoordCenterInertial.dat ./TrajB.dat
+     ln -s AhC.dir/CoordCenterInertial.dat ./TrajC.dat
+     ~/SpEC/Support/Visualization/ConvertTrajectoryToVtk -v -n TrajA,SpinA TrajA.dat SpinA.dat
+     ~/SpEC/Support/Visualization/ConvertTrajectoryToVtk -v -n TrajB,SpinB TrajB.dat SpinB.dat
+     ~/SpEC/Support/Visualization/ConvertTrajectoryToVtk -v -n TrajC,SpinC TrajC.dat SpinC.dat~
